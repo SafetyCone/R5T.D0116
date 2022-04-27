@@ -29,6 +29,13 @@ namespace System
             return outputCompilationUnit;
         }
 
+        /// <summary>
+        /// Formats using directives by grouping them into separate blocks, ordering those blocks, and ordering the directives within each block.
+        /// </summary>
+        /// <param name="compilationUnitLocalNamespaceName">
+        /// The special namespace that should be made into its own block, indicating functionalty the caller wants to consider "local" to the compilation unit (which can be whatever the caller wants, for example in the same project or solution).
+        /// This can be the <see cref="R5T.L0011.X001.NamespaceNames.NoNamespaceNamespaceName"/> value.
+        /// </param>
         public static async Task<CompilationUnitSyntax> FormatUsingDirectives(this IUsingDirectivesFormatter usingDirectivesFormatter,
             CompilationUnitSyntax compilationUnit,
             string compilationUnitLocalNamespaceName)
