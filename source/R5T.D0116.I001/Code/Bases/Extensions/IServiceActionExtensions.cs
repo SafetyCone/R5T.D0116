@@ -9,7 +9,7 @@ namespace R5T.D0116.I001
     public static class IServiceActionExtensions
     {
         /// <summary>
-        /// Adds the <see cref="AlphabeticalUsingNamespaceDirectiveComparerProvider"/> implementation of <see cref="IUsingNamespaceDirectiveComparerProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="AlphabeticalUsingNamespaceDirectiveComparerProvider"/> implementation of <see cref="IUsingNamespaceDirectiveComparerProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IUsingNamespaceDirectiveComparerProvider> AddAlphabeticalUsingNamespaceDirectiveComparerProviderAction(this IServiceAction _)
         {
@@ -18,7 +18,7 @@ namespace R5T.D0116.I001
         }
 
         /// <summary>
-        /// Adds the <see cref="AlphabeticalUsingNameAliasDirectiveComparerProvider"/> implementation of <see cref="IUsingNameAliasDirectiveComparerProvider"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="AlphabeticalUsingNameAliasDirectiveComparerProvider"/> implementation of <see cref="IUsingNameAliasDirectiveComparerProvider"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IUsingNameAliasDirectiveComparerProvider> AddAlphabeticalUsingNameAliasDirectiveComparerProviderAction(this IServiceAction _)
         {
@@ -27,7 +27,7 @@ namespace R5T.D0116.I001
         }
 
         /// <summary>
-        /// Adds the <see cref="UsingDirectivesFormatter"/> implementation of <see cref="IUsingDirectivesFormatter"/> as a <see cref="ServiceLifetime.Singleton"/>.
+        /// Adds the <see cref="UsingDirectivesFormatter"/> implementation of <see cref="IUsingDirectivesFormatter"/> as a <see cref="Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton"/>.
         /// </summary>
         public static IServiceAction<IUsingDirectivesFormatter> AddUsingDirectivesFormatterAction(this IServiceAction _,
             IServiceAction<IUsingNameAliasDirectiveBlockLabelProvider> usingNameAliasDirectiveBlockLabelProviderAction,

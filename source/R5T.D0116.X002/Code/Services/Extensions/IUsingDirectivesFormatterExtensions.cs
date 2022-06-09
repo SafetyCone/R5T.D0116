@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using R5T.D0116;
-using R5T.T0126;
+using R5T.T0134;
 
 using Instances = R5T.D0116.X001.Instances;
 
@@ -34,7 +34,7 @@ namespace System
         /// </summary>
         /// <param name="compilationUnitLocalNamespaceName">
         /// The special namespace that should be made into its own block, indicating functionalty the caller wants to consider "local" to the compilation unit (which can be whatever the caller wants, for example in the same project or solution).
-        /// This can be the <see cref="R5T.L0011.X001.NamespaceNames.NoNamespaceNamespaceName"/> value.
+        /// This can be the R5T.B0002.X001.NamespaceNames.NoNamespaceNamespaceName value.
         /// </param>
         public static async Task<CompilationUnitSyntax> FormatUsingDirectives(this IUsingDirectivesFormatter usingDirectivesFormatter,
             CompilationUnitSyntax compilationUnit,
@@ -82,8 +82,8 @@ namespace System
 
                     labeledList.Items.Sort((x, y) =>
                     {
-                        var xUsingDirective = x.GetAnnotatedNode_Typed(outputCompilationUnit);
-                        var yUsingDirective = y.GetAnnotatedNode_Typed(outputCompilationUnit);
+                        var xUsingDirective = x.GetNode(outputCompilationUnit);
+                        var yUsingDirective = y.GetNode(outputCompilationUnit);
 
                         var output = comparer.Compare(
                             xUsingDirective.GetNamespaceName(),
@@ -128,12 +128,12 @@ namespace System
 
                     labeledList.Items.Sort((x, y) =>
                     {
-                        var xUsingDirective = x.GetAnnotatedNode_Typed(outputCompilationUnit);
-                        var yUsingDirective = y.GetAnnotatedNode_Typed(outputCompilationUnit);
+                        var xUsingDirective = x.GetNode(outputCompilationUnit);
+                        var yUsingDirective = y.GetNode(outputCompilationUnit);
 
                         var output = comparer.Compare(
-                            xUsingDirective.GetNameAlias_T0129(),
-                            yUsingDirective.GetNameAlias_T0129());
+                            xUsingDirective.GetNameAlias(),
+                            yUsingDirective.GetNameAlias());
 
                         return output;
                     });
@@ -165,14 +165,14 @@ namespace System
                 // Now convert blocks back to an enumerable of usings.
                 var orderedUsingDirectives = orderedUsingDirectiveBlocksAnnotated
                     .SelectMany(x => x
-                        .Select(x => x.GetAnnotatedNode_Typed(outputCompilationUnit)))
+                        .Select(x => x.GetNode(outputCompilationUnit)))
                     .Now();
 
                 // Set usings.
                 outputCompilationUnit = outputCompilationUnit.WithUsings(orderedUsingDirectives.ToSyntaxList());
 
                 // Now modify spacings.
-                var currentFirstUsingOfFirstBlock = outputCompilationUnit.GetAnnotatedNode_Typed(firstUsingOfFirstBlockAnnotation);
+                var currentFirstUsingOfFirstBlock = outputCompilationUnit.GetAnnotatedNode(firstUsingOfFirstBlockAnnotation);
 
                 var newFirstUsingOfFirstBlock = currentFirstUsingOfFirstBlock.EnsureFirstBlockFirstUsingDirectiveLeadingLines();
 
@@ -180,7 +180,7 @@ namespace System
 
                 foreach (var currentFirstUsingOfBlockAnnotation in firstUsingOfBlockAnnotations)
                 {
-                    var currentFirstUsingOfBlock = outputCompilationUnit.GetAnnotatedNode_Typed(currentFirstUsingOfBlockAnnotation);
+                    var currentFirstUsingOfBlock = outputCompilationUnit.GetAnnotatedNode(currentFirstUsingOfBlockAnnotation);
 
                     var newFirstUsingOfBlock = currentFirstUsingOfBlock.EnsureBlockFirstUsingDirectiveLeadingLines();
 
@@ -189,7 +189,7 @@ namespace System
 
                 foreach (var currentOtherUsingAnnotation in allOtherUsingAnnotations)
                 {
-                    var currentOtherUsing = outputCompilationUnit.GetAnnotatedNode_Typed(currentOtherUsingAnnotation);
+                    var currentOtherUsing = outputCompilationUnit.GetAnnotatedNode(currentOtherUsingAnnotation);
 
                     var newOtherUsing = currentOtherUsing.EnsureBlockBodyDirectiveLeadingLines();
 
