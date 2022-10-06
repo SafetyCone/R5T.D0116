@@ -148,25 +148,25 @@ namespace System
                         .Select(x => x.Items
                             .Cast<UsingDirectiveAnnotation>()
                             .ToArray()))
-                    .Now();
+                    .ToArray();
 
                 // Get specific using directive annotations.
                 var firstUsingOfFirstBlockAnnotation = orderedUsingDirectiveBlocksAnnotated.First().First();
 
                 var firstUsingOfBlockAnnotations = orderedUsingDirectiveBlocksAnnotated.SkipFirst()
                     .Select(x => x.First())
-                    .Now();
+                    .ToArray();
 
                 var allOtherUsingAnnotations = orderedUsingDirectiveBlocksAnnotated
                     .SelectMany(x => x.SkipFirst())
-                    .Now();
+                    .ToArray();
 
                 // Set usings now so we can test for whether a using is the first syntax node in a file.
                 // Now convert blocks back to an enumerable of usings.
                 var orderedUsingDirectives = orderedUsingDirectiveBlocksAnnotated
                     .SelectMany(x => x
                         .Select(x => x.GetNode(outputCompilationUnit)))
-                    .Now();
+                    .ToArray();
 
                 // Set usings.
                 outputCompilationUnit = outputCompilationUnit.WithUsings(orderedUsingDirectives.ToSyntaxList());
