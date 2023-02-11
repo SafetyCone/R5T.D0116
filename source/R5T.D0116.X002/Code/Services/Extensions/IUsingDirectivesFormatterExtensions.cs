@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+using R5T.Magyar;
+
 using R5T.D0116;
 using R5T.T0134;
 
